@@ -38,12 +38,10 @@ let lastTemperature = null;
 let lastHumidite = null;
 let lastPluviometrie = null;
 
-
-
 exports.postData = async (req, res) => {
+ 
     try {
         const { temperature, humidite, pluviometrie } = req.body;
-
         if (temperature !== undefined) lastTemperature = temperature;
         if (humidite !== undefined) lastHumidite = humidite;
         if (pluviometrie !== undefined) lastPluviometrie = pluviometrie;
@@ -68,14 +66,14 @@ exports.postData = async (req, res) => {
 
         const saved = await data.save();
 
-        // Diffusion en temps réel via Socket.io
-        req.io.emit('new-data', saved);
-
-        return res.status(201).json({ message: 'Données reçues avec succès', saved });
-
         lastTemperature = null;
         lastHumidite = null;
         lastPluviometrie = null;
+        
+        // Diffusion en temps réel via Socket.io
+        req.io.emit('new-data', saved);
+        return res.status(201).json({ message: 'Données reçues avec succès', saved });
+
     } catch (error) {
         console.error("Erreur enregistrement :", error);
         return res.status(500).json({ message: "Erreur serveur" });
