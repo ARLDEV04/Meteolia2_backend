@@ -73,6 +73,9 @@ exports.postData = async (req, res) => {
 
         return res.status(201).json({ message: 'Données reçues avec succès', saved });
 
+        lastTemperature = null;
+        lastHumidite = null;
+        lastPluviometrie = null;
     } catch (error) {
         console.error("Erreur enregistrement :", error);
         return res.status(500).json({ message: "Erreur serveur" });
