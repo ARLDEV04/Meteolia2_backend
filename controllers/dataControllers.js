@@ -6,13 +6,13 @@ function generateSyntheticWind(temp, humidity, isRaining) {
     let direction = 0;
 
     if (isRaining) {
-        speed = getRandomInRange(0, 5);
+        speed = getRandomInRange(0, 1);
     } else if (humidity > 80 && temp < 20) {
-        speed = getRandomInRange(0, 5);
+        speed = getRandomInRange(0, 1);
     } else if (temp > 28) {
-        speed = getRandomInRange(0, 5);
+        speed = getRandomInRange(0, 1);
     } else {
-        speed = getRandomInRange(0, 5);
+        speed = getRandomInRange(0, 1);
     }
 
     if (isRaining) {
